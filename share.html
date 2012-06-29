@@ -1,0 +1,135 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+  <title>My Feed Dialog Page</title>
+</head>
+<body>
+  <div id='fb-root'></div>
+  <script src='http://connect.facebook.net/en_US/all.js'></script>
+  <p><a onclick='postToFeed(); return false;'>Post to Feed</a></p>
+
+
+  <a href="https://twitter.com/intent/tweet?original_referer=&amp;source=tweetbutton&amp;text=%E2%80%98Social%E2%80%99%20Investment%20Network%20eToro%20Is%20Picking%20Up%20Another%20%2415%20Million%20From%20Spark%2C%C2%A0Others&amp;url=http%3A%2F%2Ftechcrunch.com%2F2012%2F03%2F13%2Fsocial-investment-network-etoro-is-picking-up-another-15-million-from-spark-others%2F&amp;via=techcrunch"
+     class="btn" 
+     id="b" 
+     target="_blank">
+    Share
+  </a>
+
+
+  <p id='msg'></p>
+
+  <script type="text/javascript"> 
+    FB.init({appId: 163385353689395, status: true, cookie: true});
+
+    function postToFeed() {
+
+      // calling the API ...
+      var obj = {
+        method: 'feed',
+        link: 'https://developers.facebook.com/docs/reference/dialogs/',
+        picture: 'http://fbrell.com/f8.jpg',
+        name: 'Facebook Dialogs',
+        caption: 'Reference Documentation',
+        description: 'Using Dialogs to interact with users.'
+      };
+
+      function callback(response) {
+        document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+      }
+
+      FB.ui(obj, callback);
+    }
+    
+    //            FB.UIServer.setLoadedNode(a, window.open('about:blank', a.id, k), 'popup');
+            FB.Content.submitToTarget({url: a.url,target: a.id,params: a.params});
+        } else
+            FB.UIServer.setLoadedNode(a, window.open(a.url, a.id, k), 'popup');
+  
+  </script>
+
+  <a class="shareOverride">Share!</a>
+  <script type="text/javascript">
+    (function(){
+      var shareClass = 'shareOverride'; //You can change this class
+      
+      //the main function, either get's called with or without jQuery
+      var main = function(e) {
+      
+        //using sharer.php api:
+        shareUrl = 
+          'http://www.facebook.com/sharer.php'+
+            '?u='+encodeURIComponent(document.location.href)+
+            '&t='+encodeURIComponent(document.title);
+        
+        //Open Graph dialog *modern* api:
+        /*
+          shareUrl = 
+          https://www.facebook.com/dialog/feed?
+            app_id=163385353689395&
+            redirect_uri=http://www.hipster.com/settings/friends&
+            picture=http://d23u88ica5ek2k.cloudfront.net/4e6e5aac5b542f0001000b05/full_4e6e5aac5b542f0001000b05.jpg&
+            link=http://www.hipster.com/?invited_by=4f2373b7f993950003001456
+            
+       app_id:* Your application's identifier. Required, but automatically specified by most SDKs.
+redirect_uri:* The URL to redirect to after the user clicks a button on the dialog. Required, but automatically specified by most SDKs.
+       display: The display mode in which to render the dialog. The default is page on the www subdomain. 
+               display=wap is currently not supported. This is automatically specified by most SDKs.
+               
+         from: The ID or username of the user posting the message. If this is unspecified, it defaults to the current user.
+               If specified, it must be the ID of the user or of a page that the user administers.
+               
+           to: The ID or username of the profile that this story will be published to.
+               If this is unspecified, it defaults to the the value of from.
+         link: The link attached to this post
+      picture: The URL of a picture attached to this post. 
+               The picture must be at least 50px by 50px and have a maximum aspect ratio of 3:1
+       source: The URL of a media file (e.g., a SWF or video file) attached to this post.
+               If both source and picture are specified, only source is used.
+         name: The name of the link attachment.
+      caption: The caption of the link (appears beneath the link name).
+  description: The description of the link (appears beneath the link caption).
+      message: 
+   properties: A JSON object of key/value pairs which will appear in the stream attachmnt beneath the description, 
+               with each property on its own line. Keys must be strings, and values
+               can be either strings or JSON objects with the keys text and href.
+      actions: A JSON array of action links which will appear next to the "Comment" and "Like" link under posts.
+               Each action link should be represented as a JSON object with keys name and link.
+          ref: A text reference for the category of feed post.
+               This category is used in Facebook Insights to help you measure the performance of different types of post
+
+Return Data: ?post_id
+or / if canceled
+        */
+        var b = "scrollbars=yes,resizable=yes,toolbar=no,location=yes",
+            width = 550,
+            height = 420,
+            screenH = screen.height,
+            screenW = screen.width,
+            left = Math.round(screenW / 2 - width / 2),
+            top = 0;
+        return screenH > height && (top = Math.round(screenH / 2 - height / 2)), window.open(a, 'sharer', b + ",width=" + width + ",height=" + height + ",left=" + left + ",top=" + top)
+        
+        var popupResult = window.open(shareUrl,
+          'sharer',
+          'toolbar=0,status=0,width=650,height=350'
+        );
+        console.log(popupResult);
+      };
+            
+      //with jQuery:
+      if (jQuery) {
+        jQuery('.' + shareClass).click(function(e){
+          main(e)
+        });
+      
+      //without jQuery:
+      } else {
+        var shares = document.getElementsByClassName(shareClass);
+        //for ()
+      }
+      document.getElementById('share').onclick = main;
+    })
+  </script>
+</body>
+</html>
